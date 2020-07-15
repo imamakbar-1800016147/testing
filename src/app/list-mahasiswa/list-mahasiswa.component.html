@@ -1,0 +1,38 @@
+<form class="form-inline" style="float: right;">
+  <input class="form-control mr-sm-2" name="searchInput" placeholder="Cari mahasiswa..." #searchInput="ngModel"
+    [(ngModel)]="searchText">
+</form>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No</th>
+      <th>Nama</th>
+      <th>NIM</th>
+      <th>Program Studi</th>
+      <th>Tahun Angkatan</th>
+      <th>Univeristas Mahasiswa</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let mahasiswa of mahasiswaArray; let nomor=index">
+      <tr *ngIf="filterCondition(mahasiswa)">
+        <th scope="row">{{nomor+1}}</th>
+        <td>{{mahasiswa.namaMahasiswa}}</td>
+        <td>{{mahasiswa.nim}}</td>
+        <td>{{mahasiswa.programstudi}}</td>
+        <td>{{mahasiswa.tahunangkatan}}</td>
+        <td>{{mahasiswa.universitasmahasiswa}}</td>
+        <td>
+          <button class="btn btn-outline-info mr-3" data-toggle="modal" data-target="#exampleModalLong"
+            (click)="studentsService.populateForm(mahasiswa)"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-outline-danger" (click)="onDelete(mahasiswa.$key)"><i class="fas fa-trash-alt"></i></button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<div class="alert alert-danger mt-3" *ngIf="showDeletedMessage">
+  Berhasil menghapus data.
+</div>

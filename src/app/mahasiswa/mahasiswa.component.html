@@ -1,0 +1,65 @@
+<div class="container">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalLong"
+    style="float: left;">
+    Tambah Data Mahasiswa
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Masukkan Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="this.studentsService.form">
+            <input type="hidden" formControlName="$key">
+            <div class="form-group">
+              <label for="nama">Nama Mahasiswa</label>
+              <input formControlName="namaMahasiswa" class="form-control" id="nama"
+                [ngClass]="{'is-invalid':submitted && formControls.namaMahasiswa.errors}">
+              <div class="invalid-feedback" *ngIf="submitted && formControls.namaMahasiswa.errors">
+                Kolom ini harus di isi.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nim">NIM</label>
+              <input formControlName="nim" class="form-control" id="nim">
+            </div>
+            <div class="form-group">
+              <label for="programstudi">Program Studi</label>
+              <input formControlName="programstudi" class="form-control" id="programstudi">
+            </div>
+            <div class="form-group">
+              <label for="tahunangkatan">Tahun Angkatan</label>
+              <input formControlName="tahunangkatan" class="form-control" id="tahunangkatan">
+            </div>
+            <div class="form-group">
+              <label for="universitasmahasiswa">Universitas Mahasiswa</label>
+              <input formControlName="universitasmahasiswa" class="form-control" id="universitasmahasiswa">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <button id="btnSave" type="button" class="btn btn-primary" (click)="onSubmit()">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <app-list-mahasiswa></app-list-mahasiswa>
+</div>
+<div class="alert alert-success mt-3" *ngIf="showSuccessMessage">
+  Berhasil menambahkan data.
+</div>
+<div class="alert alert-info mt-3" *ngIf="showSuccessEdit">
+  Berhasil mengubah data.
+</div>
